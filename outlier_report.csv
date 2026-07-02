@@ -1,0 +1,6 @@
+Feature,IQR_Outliers,IQR_Outlier_%,ZScore_Outliers,ZScore_Outlier_%,Clinical_Violations,IQR_Lower,IQR_Upper
+Heart Rate (bpm),0,0.0,0,0.0,0,46.0,142.0
+SpO2 Level (%),0,0.0,0,0.0,4,83.0,107.0
+Systolic Blood Pressure (mmHg),0,0.0,0,0.0,4213,48.5,228.5
+Diastolic Blood Pressure (mmHg),0,0.0,0,0.0,3076,34.5,142.5
+Body Temperature (°C),135,0.22,71,0.12,0,35.35,38.95

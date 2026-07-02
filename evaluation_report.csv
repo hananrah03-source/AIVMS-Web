@@ -1,0 +1,6 @@
+target,accuracy,precision,recall,f1_score,roc_auc,sensitivity,specificity,false_alarm_rate
+Heart Rate Alert,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0
+SpO2 Level Alert,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0
+Blood Pressure Alert,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0
+Temperature Alert,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0
+Predicted Disease,0.9516,0.9518,0.9516,0.9514,0.9971,N/A,N/A,N/A

@@ -1,0 +1,244 @@
+2026-03-05 00:25:28,667 [INFO] ICU-Monitor � ======================================================================
+2026-03-05 00:25:28,667 [INFO] ICU-Monitor �   REAL-TIME PATIENT MONITORING � ICU ML PLATFORM 2026
+2026-03-05 00:25:28,667 [INFO] ICU-Monitor � ======================================================================
+2026-03-05 00:25:28,668 [INFO] ICU-Monitor � [PIPELINE] Loading dataset from: D:\hanane_project\Synthetic_patient-HealthCare-Monitoring_dataset.csv
+2026-03-05 00:25:28,776 [INFO] ICU-Monitor � [PIPELINE] Dataset shape: (60000, 13) | Columns: ['Patient Number', 'Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (�C)', 'Fall Detection', 'Predicted Disease', 'Data Accuracy (%)', 'Heart Rate Alert', 'SpO2 Level Alert', 'Blood Pressure Alert', 'Temperature Alert']
+2026-03-05 00:25:28,778 [INFO] ICU-Monitor � [PIPELINE] Running EDA �
+2026-03-05 00:25:28,780 [INFO] ICU-Monitor � ============================================================
+2026-03-05 00:25:28,782 [INFO] ICU-Monitor � [EDA] Starting full EDA pipeline �
+2026-03-05 00:25:28,782 [INFO] ICU-Monitor � [EDA] Computing statistical summary �
+2026-03-05 00:25:28,890 [INFO] ICU-Monitor � [EDA] Analysing feature distributions �
+2026-03-05 00:25:30,399 [INFO] ICU-Monitor � [EDA] Distribution plot saved.
+2026-03-05 00:25:30,400 [INFO] ICU-Monitor � [EDA] Computing correlation matrix �
+2026-03-05 00:25:30,693 [INFO] ICU-Monitor � [EDA] Correlation matrix saved.
+2026-03-05 00:25:30,693 [INFO] ICU-Monitor � [EDA] Detecting class imbalance �
+2026-03-05 00:25:31,360 [INFO] ICU-Monitor � [EDA] Class imbalance:
+{
+  "Predicted Disease": 1.02,
+  "Heart Rate Alert": 1.61,
+  "SpO2 Level Alert": 1.38,
+  "Blood Pressure Alert": 1.26,
+  "Temperature Alert": 2.91
+}
+2026-03-05 00:25:31,361 [INFO] ICU-Monitor � [EDA] Running outlier detection (IQR + Z-Score) �
+2026-03-05 00:25:31,393 [INFO] ICU-Monitor � [EDA] Outlier detection complete:
+                        Feature  IQR_Outliers  IQR_Outlier_%  ZScore_Outliers  ZScore_Outlier_%  Clinical_Violations  IQR_Lower  IQR_Upper
+               Heart Rate (bpm)             0           0.00                0              0.00                    0      46.00     142.00
+                 SpO2 Level (%)             0           0.00                0              0.00                    4      83.00     107.00
+ Systolic Blood Pressure (mmHg)             0           0.00                0              0.00                 4213      48.50     228.50
+Diastolic Blood Pressure (mmHg)             0           0.00                0              0.00                 3076      34.50     142.50
+          Body Temperature (�C)           135           0.22               71              0.12                    0      35.35      38.95
+2026-03-05 00:25:31,396 [INFO] ICU-Monitor � [EDA] Computing univariate feature importance (ANOVA) �
+2026-03-05 00:25:31,577 [INFO] ICU-Monitor � [EDA] Univariate importance saved.
+2026-03-05 00:25:31,578 [INFO] ICU-Monitor � [EDA] Full EDA pipeline complete.
+2026-03-05 00:25:31,578 [INFO] ICU-Monitor � ============================================================
+2026-03-05 00:25:31,579 [INFO] ICU-Monitor � [PIPELINE] Running preprocessing �
+2026-03-05 00:25:31,581 [INFO] ICU-Monitor � [PREPROC] Starting preprocessing pipeline �
+2026-03-05 00:25:31,596 [INFO] ICU-Monitor � [PREPROC] Preparing dataset for target: Heart Rate Alert
+2026-03-05 00:25:31,656 [INFO] ICU-Monitor � [PREPROC] Preparing dataset for target: SpO2 Level Alert
+2026-03-05 00:25:31,717 [INFO] ICU-Monitor � [PREPROC] Preparing dataset for target: Blood Pressure Alert
+2026-03-05 00:25:31,785 [INFO] ICU-Monitor � [PREPROC] Preparing dataset for target: Temperature Alert
+2026-03-05 00:25:31,864 [INFO] ICU-Monitor � [PREPROC] Preparing dataset for target: Predicted Disease
+2026-03-05 00:25:31,962 [INFO] ICU-Monitor � [PREPROC] Preprocessing pipeline complete.
+2026-03-05 00:25:31,964 [INFO] ICU-Monitor � [PIPELINE] Training XGBoost models �
+2026-03-05 00:25:31,965 [INFO] ICU-Monitor � [TRAIN] Training model for: Heart Rate Alert
+2026-03-05 00:25:32,064 [INFO] ICU-Monitor � [TRAIN] Hyperparameter tuning (random) for: Heart Rate Alert
+2026-03-05 00:26:35,242 [INFO] ICU-Monitor � [TRAIN] Best params for Heart Rate Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-03-05 00:26:37,464 [INFO] ICU-Monitor � [TRAIN] Model trained for Heart Rate Alert | Best iteration: 299
+2026-03-05 00:26:37,465 [INFO] ICU-Monitor � [TRAIN] Training model for: SpO2 Level Alert
+2026-03-05 00:26:37,615 [INFO] ICU-Monitor � [TRAIN] Hyperparameter tuning (random) for: SpO2 Level Alert
+2026-03-05 00:27:39,867 [INFO] ICU-Monitor � [TRAIN] Best params for SpO2 Level Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-03-05 00:27:40,939 [INFO] ICU-Monitor � [TRAIN] Model trained for SpO2 Level Alert | Best iteration: 163
+2026-03-05 00:27:40,939 [INFO] ICU-Monitor � [TRAIN] Training model for: Blood Pressure Alert
+2026-03-05 00:27:41,403 [INFO] ICU-Monitor � [TRAIN] Hyperparameter tuning (random) for: Blood Pressure Alert
+2026-03-05 00:28:48,445 [INFO] ICU-Monitor � [TRAIN] Best params for Blood Pressure Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-03-05 00:28:50,460 [INFO] ICU-Monitor � [TRAIN] Model trained for Blood Pressure Alert | Best iteration: 247
+2026-03-05 00:28:50,460 [INFO] ICU-Monitor � [TRAIN] Training model for: Temperature Alert
+2026-03-05 00:28:50,901 [INFO] ICU-Monitor � [TRAIN] Hyperparameter tuning (random) for: Temperature Alert
+2026-03-05 00:30:07,643 [INFO] ICU-Monitor � [TRAIN] Best params for Temperature Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-03-05 00:30:08,951 [INFO] ICU-Monitor � [TRAIN] Model trained for Temperature Alert | Best iteration: 176
+2026-03-05 00:30:08,952 [INFO] ICU-Monitor � [TRAIN] Training model for: Predicted Disease
+2026-03-05 00:30:09,999 [INFO] ICU-Monitor � [TRAIN] Hyperparameter tuning (random) for: Predicted Disease
+2026-04-06 21:06:57,245 [INFO] ICU-Monitor — ======================================================================
+2026-04-06 21:06:57,245 [INFO] ICU-Monitor —   REAL-TIME PATIENT MONITORING — ICU ML PLATFORM 2026
+2026-04-06 21:06:57,245 [INFO] ICU-Monitor — ======================================================================
+2026-04-06 21:06:57,245 [INFO] ICU-Monitor — [PIPELINE] Loading dataset from: /Users/bsoft/Desktop/hanane_project/Synthetic_patient-HealthCare-Monitoring_dataset copy.csv
+2026-04-06 21:06:57,314 [INFO] ICU-Monitor — [PIPELINE] Dataset shape: (60000, 13) | Columns: ['Patient Number', 'Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)', 'Fall Detection', 'Predicted Disease', 'Data Accuracy (%)', 'Heart Rate Alert', 'SpO2 Level Alert', 'Blood Pressure Alert', 'Temperature Alert']
+2026-04-06 21:06:57,315 [INFO] ICU-Monitor — [PIPELINE] Running EDA …
+2026-04-06 21:06:57,318 [INFO] ICU-Monitor — ============================================================
+2026-04-06 21:06:57,318 [INFO] ICU-Monitor — [EDA] Starting full EDA pipeline …
+2026-04-06 21:06:57,318 [INFO] ICU-Monitor — [EDA] Computing statistical summary …
+2026-04-06 21:06:57,357 [INFO] ICU-Monitor — [EDA] Summary saved → /Users/bsoft/Desktop/hanane_project/statistical_summary.csv
+2026-04-06 21:06:57,357 [INFO] ICU-Monitor — [EDA] Analysing feature distributions …
+2026-04-06 21:06:58,403 [INFO] ICU-Monitor — [EDA] Distribution plot saved.
+2026-04-06 21:06:58,403 [INFO] ICU-Monitor — [EDA] Computing correlation matrix …
+2026-04-06 21:06:58,602 [INFO] ICU-Monitor — [EDA] Correlation matrix saved.
+2026-04-06 21:06:58,602 [INFO] ICU-Monitor — [EDA] Detecting class imbalance …
+2026-04-06 21:06:59,083 [INFO] ICU-Monitor — [EDA] Class imbalance:
+{
+  "Predicted Disease": 1.02,
+  "Heart Rate Alert": 1.61,
+  "SpO2 Level Alert": 1.38,
+  "Blood Pressure Alert": 1.26,
+  "Temperature Alert": 2.91
+}
+2026-04-06 21:06:59,083 [INFO] ICU-Monitor — [EDA] Running outlier detection (IQR + Z-Score) …
+2026-04-06 21:06:59,111 [INFO] ICU-Monitor — [EDA] Outlier detection complete:
+                        Feature  IQR_Outliers  IQR_Outlier_%  ZScore_Outliers  ZScore_Outlier_%  Clinical_Violations  IQR_Lower  IQR_Upper
+               Heart Rate (bpm)             0           0.00                0              0.00                    0      46.00     142.00
+                 SpO2 Level (%)             0           0.00                0              0.00                    4      83.00     107.00
+ Systolic Blood Pressure (mmHg)             0           0.00                0              0.00                 4213      48.50     228.50
+Diastolic Blood Pressure (mmHg)             0           0.00                0              0.00                 3076      34.50     142.50
+          Body Temperature (°C)           135           0.22               71              0.12                    0      35.35      38.95
+2026-04-06 21:06:59,111 [INFO] ICU-Monitor — [EDA] Computing univariate feature importance (ANOVA) …
+2026-04-06 21:06:59,304 [INFO] ICU-Monitor — [EDA] Univariate importance saved.
+2026-04-06 21:06:59,304 [INFO] ICU-Monitor — [EDA] Full EDA pipeline complete.
+2026-04-06 21:06:59,304 [INFO] ICU-Monitor — ============================================================
+2026-04-06 21:06:59,305 [INFO] ICU-Monitor — [PIPELINE] Running preprocessing …
+2026-04-06 21:06:59,308 [INFO] ICU-Monitor — [PREPROC] Starting preprocessing pipeline …
+2026-04-06 21:06:59,324 [INFO] ICU-Monitor — [PREPROC] Preparing dataset for target: Heart Rate Alert
+2026-04-06 21:06:59,371 [INFO] ICU-Monitor — [PREPROC] Heart Rate Alert → Train: 48000 | Test: 12000 | Features: ['Heart Rate (bpm)', 'Shock_Index', 'HR_SpO2_Product']
+2026-04-06 21:06:59,371 [INFO] ICU-Monitor — [PREPROC] Preparing dataset for target: SpO2 Level Alert
+2026-04-06 21:06:59,416 [INFO] ICU-Monitor — [PREPROC] SpO2 Level Alert → Train: 48000 | Test: 12000 | Features: ['SpO2 Level (%)', 'HR_SpO2_Product']
+2026-04-06 21:06:59,416 [INFO] ICU-Monitor — [PREPROC] Preparing dataset for target: Blood Pressure Alert
+2026-04-06 21:06:59,463 [INFO] ICU-Monitor — [PREPROC] Blood Pressure Alert → Train: 48000 | Test: 12000 | Features: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Pulse_Pressure', 'Mean_Arterial_Pressure', 'BP_Stage', 'Shock_Index']
+2026-04-06 21:06:59,463 [INFO] ICU-Monitor — [PREPROC] Preparing dataset for target: Temperature Alert
+2026-04-06 21:06:59,508 [INFO] ICU-Monitor — [PREPROC] Temperature Alert → Train: 48000 | Test: 12000 | Features: ['Body Temperature (°C)', 'Fever_Stage']
+2026-04-06 21:06:59,508 [INFO] ICU-Monitor — [PREPROC] Preparing dataset for target: Predicted Disease
+2026-04-06 21:06:59,568 [INFO] ICU-Monitor — [PREPROC] Predicted Disease → Train: 48000 | Test: 12000 | Features: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)', 'Pulse_Pressure', 'Mean_Arterial_Pressure', 'BP_Stage', 'Shock_Index', 'HR_SpO2_Product', 'Fever_Stage']
+2026-04-06 21:06:59,568 [INFO] ICU-Monitor — [PREPROC] Preprocessing pipeline complete.
+2026-04-06 21:06:59,571 [INFO] ICU-Monitor — [PIPELINE] Training XGBoost models …
+2026-04-06 21:06:59,571 [INFO] ICU-Monitor — [TRAIN] Training model for: Heart Rate Alert
+2026-04-06 21:06:59,644 [INFO] ICU-Monitor — [TRAIN] SMOTE on Heart Rate Alert: 48000 → 59188 samples
+2026-04-06 21:06:59,651 [INFO] ICU-Monitor — [TRAIN] Hyperparameter tuning (random) for: Heart Rate Alert
+2026-04-06 21:07:19,896 [INFO] ICU-Monitor — [TRAIN] Best params for Heart Rate Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-04-06 21:07:21,847 [INFO] ICU-Monitor — [TRAIN] Model trained for Heart Rate Alert | Best iteration: 299
+2026-04-06 21:07:21,847 [INFO] ICU-Monitor — [TRAIN] Training model for: SpO2 Level Alert
+2026-04-06 21:07:21,941 [INFO] ICU-Monitor — [TRAIN] SMOTE on SpO2 Level Alert: 48000 → 55632 samples
+2026-04-06 21:07:21,951 [INFO] ICU-Monitor — [TRAIN] Hyperparameter tuning (random) for: SpO2 Level Alert
+2026-04-06 21:07:37,004 [INFO] ICU-Monitor — [TRAIN] Best params for SpO2 Level Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-04-06 21:07:38,009 [INFO] ICU-Monitor — [TRAIN] Model trained for SpO2 Level Alert | Best iteration: 158
+2026-04-06 21:07:38,010 [INFO] ICU-Monitor — [TRAIN] Training model for: Blood Pressure Alert
+2026-04-06 21:07:38,250 [INFO] ICU-Monitor — [TRAIN] SMOTE on Blood Pressure Alert: 48000 → 53552 samples
+2026-04-06 21:07:38,256 [INFO] ICU-Monitor — [TRAIN] Hyperparameter tuning (random) for: Blood Pressure Alert
+2026-04-06 21:07:56,450 [INFO] ICU-Monitor — [TRAIN] Best params for Blood Pressure Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-04-06 21:07:58,366 [INFO] ICU-Monitor — [TRAIN] Model trained for Blood Pressure Alert | Best iteration: 299
+2026-04-06 21:07:58,366 [INFO] ICU-Monitor — [TRAIN] Training model for: Temperature Alert
+2026-04-06 21:07:58,590 [INFO] ICU-Monitor — [TRAIN] SMOTE on Temperature Alert: 48000 → 71450 samples
+2026-04-06 21:07:58,598 [INFO] ICU-Monitor — [TRAIN] Hyperparameter tuning (random) for: Temperature Alert
+2026-04-06 21:08:16,330 [INFO] ICU-Monitor — [TRAIN] Best params for Temperature Alert: {'subsample': 0.8, 'reg_alpha': 0, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 1.0} | Score: 1.0000
+2026-04-06 21:08:17,514 [INFO] ICU-Monitor — [TRAIN] Model trained for Temperature Alert | Best iteration: 163
+2026-04-06 21:08:17,514 [INFO] ICU-Monitor — [TRAIN] Training model for: Predicted Disease
+2026-04-06 21:08:18,145 [INFO] ICU-Monitor — [TRAIN] SMOTE on Predicted Disease: 48000 → 48670 samples
+2026-04-06 21:08:18,151 [INFO] ICU-Monitor — [TRAIN] Hyperparameter tuning (random) for: Predicted Disease
+2026-04-06 21:11:29,323 [INFO] ICU-Monitor — [TRAIN] Best params for Predicted Disease: {'subsample': 0.7, 'reg_alpha': 0, 'n_estimators': 200, 'min_child_weight': 1, 'max_depth': 6, 'learning_rate': 0.05, 'colsample_bytree': 0.8} | Score: 0.9571
+2026-04-06 21:11:33,011 [INFO] ICU-Monitor — [TRAIN] Model trained for Predicted Disease | Best iteration: 198
+2026-04-06 21:11:33,011 [INFO] ICU-Monitor — [SAVE] Saving models to '/Users/bsoft/Desktop/hanane_project/' …
+2026-04-06 21:11:33,018 [INFO] ICU-Monitor — [SAVE]   ✓  /Users/bsoft/Desktop/hanane_project/Heart Rate (bpm).pkl
+2026-04-06 21:11:33,021 [INFO] ICU-Monitor — [SAVE]   ✓  /Users/bsoft/Desktop/hanane_project/SpO2 Level (%).pkl
+2026-04-06 21:11:33,024 [INFO] ICU-Monitor — [SAVE]   ✓  /Users/bsoft/Desktop/hanane_project/Blood Pressure (mmHg).pkl
+2026-04-06 21:11:33,027 [INFO] ICU-Monitor — [SAVE]   ✓  /Users/bsoft/Desktop/hanane_project/Body Temperature (°C).pkl
+2026-04-06 21:11:33,037 [INFO] ICU-Monitor — [SAVE]   ✓  /Users/bsoft/Desktop/hanane_project/Predicted Disease.pkl
+2026-04-06 21:11:33,037 [INFO] ICU-Monitor — [PIPELINE] Evaluating models …
+2026-04-06 21:11:33,074 [INFO] ICU-Monitor — [EVAL] Heart Rate Alert → Acc=1.0000 | F1=1.0000 | AUC=1.0 | Sensitivity=1.0 | FAR=0.0
+2026-04-06 21:11:33,435 [INFO] ICU-Monitor — [EVAL] SpO2 Level Alert → Acc=1.0000 | F1=1.0000 | AUC=1.0 | Sensitivity=1.0 | FAR=0.0
+2026-04-06 21:11:33,945 [INFO] ICU-Monitor — [EVAL] Blood Pressure Alert → Acc=1.0000 | F1=1.0000 | AUC=1.0 | Sensitivity=1.0 | FAR=0.0
+2026-04-06 21:11:34,323 [INFO] ICU-Monitor — [EVAL] Temperature Alert → Acc=1.0000 | F1=1.0000 | AUC=1.0 | Sensitivity=1.0 | FAR=0.0
+2026-04-06 21:11:34,854 [INFO] ICU-Monitor — [EVAL] Predicted Disease → Acc=0.9516 | F1=0.9514 | AUC=0.9971 | Sensitivity=N/A | FAR=N/A
+2026-04-06 21:11:35,084 [INFO] ICU-Monitor — [EVAL] Consolidated evaluation report saved.
+2026-04-06 21:11:35,084 [INFO] ICU-Monitor — [PIPELINE] Evaluation complete.
+2026-04-06 21:11:35,084 [INFO] ICU-Monitor — [PIPELINE] Running Hybrid Alarm Engine demo …
+2026-04-06 21:11:35,090 [INFO] ICU-Monitor — [ALARM] Patient PT-DEMO-001 → Risk: CRITICAL | Disease: 4 | Active Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,100 [INFO] ICU-Monitor — [ALARM] Patient PT-DEMO-002 → Risk: NORMAL | Disease: 2 | Active Alarms: []
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor — [ALARM] Patient PT-DEMO-003 → Risk: WARNING | Disease: ABNORMAL | Active Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor — [PIPELINE] Starting real-time simulation …
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor — [API] FastAPI Backend Architecture:
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor —   [Doctor Dashboard]
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor —     GET /api/v1/dashboard/doctor
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor —     GET /api/v1/patient/{patient_id}/history
+2026-04-06 21:11:35,107 [INFO] ICU-Monitor —     GET /api/v1/patient/{patient_id}/risk_score
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —   [Nurse Tablet]
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     GET /api/v1/dashboard/nurse
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     POST /api/v1/alarm/{alarm_id}/acknowledge
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —   [Prediction Endpoints]
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     POST /api/v1/predict/vitals
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     POST /api/v1/predict/batch
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —   [Notification System]
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     POST /api/v1/notify/doctor
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     POST /api/v1/notify/nurse_station
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     WS /ws/vitals/{patient_id}
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor —     MQTT icu/vitals/{ward}/{bed_id}
+2026-04-06 21:11:35,108 [INFO] ICU-Monitor — [SIM] Starting real-time ICU simulation: 6 patients × 25 steps
+2026-04-06 21:11:35,294 [WARNING] ICU-Monitor — [SIM][Step 04] PT-1001 | WARNING | Vitals: HR=121 SpO2=91 SBP=98 DBP=71 Temp=38.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,345 [WARNING] ICU-Monitor — [SIM][Step 05] PT-1001 | WARNING | Vitals: HR=125 SpO2=89 SBP=87 DBP=67 Temp=38.3 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,392 [WARNING] ICU-Monitor — [SIM][Step 06] PT-1001 | WARNING | Vitals: HR=131 SpO2=88 SBP=79 DBP=65 Temp=38.5 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,431 [WARNING] ICU-Monitor — [SIM][Step 07] PT-1001 | WARNING | Vitals: HR=138 SpO2=87 SBP=75 DBP=64 Temp=38.5 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,453 [WARNING] ICU-Monitor — [SIM][Step 07] PT-1004 | WARNING | Vitals: HR=82 SpO2=92 SBP=134 DBP=91 Temp=37.2 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,476 [WARNING] ICU-Monitor — [SIM][Step 08] PT-1001 | WARNING | Vitals: HR=138 SpO2=86 SBP=71 DBP=64 Temp=38.8 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,502 [WARNING] ICU-Monitor — [SIM][Step 08] PT-1004 | WARNING | Vitals: HR=82 SpO2=92 SBP=135 DBP=91 Temp=37.2 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,530 [WARNING] ICU-Monitor — [SIM][Step 09] PT-1001 | CRITICAL | Vitals: HR=143 SpO2=84 SBP=67 DBP=62 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,555 [WARNING] ICU-Monitor — [SIM][Step 09] PT-1004 | WARNING | Vitals: HR=82 SpO2=92 SBP=131 DBP=93 Temp=37.2 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,581 [WARNING] ICU-Monitor — [SIM][Step 10] PT-1001 | CRITICAL | Vitals: HR=153 SpO2=81 SBP=61 DBP=56 Temp=39.1 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,607 [WARNING] ICU-Monitor — [SIM][Step 10] PT-1004 | WARNING | Vitals: HR=82 SpO2=92 SBP=133 DBP=95 Temp=37.3 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,631 [WARNING] ICU-Monitor — [SIM][Step 11] PT-1001 | CRITICAL | Vitals: HR=157 SpO2=82 SBP=60 DBP=58 Temp=39.1 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,659 [WARNING] ICU-Monitor — [SIM][Step 11] PT-1004 | WARNING | Vitals: HR=85 SpO2=92 SBP=141 DBP=98 Temp=37.4 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,681 [WARNING] ICU-Monitor — [SIM][Step 12] PT-1001 | CRITICAL | Vitals: HR=157 SpO2=82 SBP=62 DBP=58 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,705 [WARNING] ICU-Monitor — [SIM][Step 12] PT-1004 | WARNING | Vitals: HR=88 SpO2=91 SBP=142 DBP=101 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,727 [WARNING] ICU-Monitor — [SIM][Step 13] PT-1001 | CRITICAL | Vitals: HR=156 SpO2=82 SBP=60 DBP=60 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,750 [WARNING] ICU-Monitor — [SIM][Step 13] PT-1004 | WARNING | Vitals: HR=92 SpO2=91 SBP=147 DBP=103 Temp=37.7 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,774 [WARNING] ICU-Monitor — [SIM][Step 14] PT-1001 | CRITICAL | Vitals: HR=156 SpO2=82 SBP=61 DBP=62 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,802 [WARNING] ICU-Monitor — [SIM][Step 14] PT-1004 | WARNING | Vitals: HR=95 SpO2=91 SBP=148 DBP=107 Temp=37.9 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,825 [WARNING] ICU-Monitor — [SIM][Step 15] PT-1001 | CRITICAL | Vitals: HR=154 SpO2=82 SBP=61 DBP=63 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,893 [WARNING] ICU-Monitor — [SIM][Step 15] PT-1003 | CRITICAL | Vitals: HR=97 SpO2=90 SBP=70 DBP=62 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,910 [WARNING] ICU-Monitor — [SIM][Step 15] PT-1004 | WARNING | Vitals: HR=97 SpO2=90 SBP=150 DBP=107 Temp=38.0 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,919 [WARNING] ICU-Monitor — [SIM][Step 15] PT-1005 | WARNING | Vitals: HR=86 SpO2=98 SBP=140 DBP=91 Temp=37.1 | Alarms: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,938 [WARNING] ICU-Monitor — [SIM][Step 16] PT-1001 | CRITICAL | Vitals: HR=157 SpO2=82 SBP=60 DBP=65 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,958 [WARNING] ICU-Monitor — [SIM][Step 16] PT-1003 | CRITICAL | Vitals: HR=96 SpO2=90 SBP=67 DBP=62 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,967 [WARNING] ICU-Monitor — [SIM][Step 16] PT-1004 | WARNING | Vitals: HR=96 SpO2=90 SBP=151 DBP=109 Temp=38.0 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:35,977 [WARNING] ICU-Monitor — [SIM][Step 16] PT-1005 | WARNING | Vitals: HR=87 SpO2=96 SBP=145 DBP=95 Temp=37.3 | Alarms: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:35,995 [WARNING] ICU-Monitor — [SIM][Step 17] PT-1001 | CRITICAL | Vitals: HR=159 SpO2=82 SBP=62 DBP=64 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,015 [WARNING] ICU-Monitor — [SIM][Step 17] PT-1003 | CRITICAL | Vitals: HR=97 SpO2=90 SBP=69 DBP=62 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,024 [WARNING] ICU-Monitor — [SIM][Step 17] PT-1004 | WARNING | Vitals: HR=99 SpO2=90 SBP=150 DBP=108 Temp=37.9 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,031 [WARNING] ICU-Monitor — [SIM][Step 17] PT-1005 | WARNING | Vitals: HR=89 SpO2=96 SBP=146 DBP=95 Temp=37.4 | Alarms: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,047 [WARNING] ICU-Monitor — [SIM][Step 18] PT-1001 | CRITICAL | Vitals: HR=160 SpO2=82 SBP=60 DBP=64 Temp=38.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,056 [WARNING] ICU-Monitor — [SIM][Step 18] PT-1002 | WARNING | Vitals: HR=78 SpO2=94 SBP=81 DBP=63 Temp=36.7 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,064 [WARNING] ICU-Monitor — [SIM][Step 18] PT-1003 | CRITICAL | Vitals: HR=97 SpO2=89 SBP=68 DBP=61 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,071 [WARNING] ICU-Monitor — [SIM][Step 18] PT-1004 | WARNING | Vitals: HR=100 SpO2=90 SBP=149 DBP=108 Temp=37.8 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,081 [WARNING] ICU-Monitor — [SIM][Step 18] PT-1005 | WARNING | Vitals: HR=92 SpO2=96 SBP=149 DBP=99 Temp=37.5 | Alarms: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,099 [WARNING] ICU-Monitor — [SIM][Step 19] PT-1001 | CRITICAL | Vitals: HR=159 SpO2=81 SBP=60 DBP=64 Temp=38.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,107 [WARNING] ICU-Monitor — [SIM][Step 19] PT-1002 | WARNING | Vitals: HR=85 SpO2=92 SBP=75 DBP=60 Temp=36.8 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,116 [WARNING] ICU-Monitor — [SIM][Step 19] PT-1003 | WARNING | Vitals: HR=97 SpO2=89 SBP=70 DBP=64 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,124 [WARNING] ICU-Monitor — [SIM][Step 19] PT-1004 | WARNING | Vitals: HR=99 SpO2=90 SBP=149 DBP=108 Temp=37.7 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,133 [WARNING] ICU-Monitor — [SIM][Step 19] PT-1005 | WARNING | Vitals: HR=97 SpO2=97 SBP=160 DBP=104 Temp=37.6 | Alarms: ['Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,152 [WARNING] ICU-Monitor — [SIM][Step 20] PT-1001 | CRITICAL | Vitals: HR=157 SpO2=82 SBP=60 DBP=62 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,161 [WARNING] ICU-Monitor — [SIM][Step 20] PT-1002 | CRITICAL | Vitals: HR=95 SpO2=91 SBP=70 DBP=60 Temp=36.9 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,168 [WARNING] ICU-Monitor — [SIM][Step 20] PT-1003 | WARNING | Vitals: HR=98 SpO2=88 SBP=73 DBP=69 Temp=37.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,176 [WARNING] ICU-Monitor — [SIM][Step 20] PT-1004 | WARNING | Vitals: HR=99 SpO2=90 SBP=150 DBP=108 Temp=37.8 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,186 [WARNING] ICU-Monitor — [SIM][Step 20] PT-1005 | WARNING | Vitals: HR=102 SpO2=97 SBP=167 DBP=108 Temp=37.6 | Alarms: ['Heart Rate (bpm)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,205 [WARNING] ICU-Monitor — [SIM][Step 21] PT-1001 | CRITICAL | Vitals: HR=159 SpO2=82 SBP=60 DBP=63 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,212 [WARNING] ICU-Monitor — [SIM][Step 21] PT-1002 | CRITICAL | Vitals: HR=91 SpO2=91 SBP=66 DBP=57 Temp=36.8 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,220 [WARNING] ICU-Monitor — [SIM][Step 21] PT-1003 | WARNING | Vitals: HR=103 SpO2=86 SBP=71 DBP=63 Temp=37.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,229 [WARNING] ICU-Monitor — [SIM][Step 21] PT-1004 | WARNING | Vitals: HR=104 SpO2=88 SBP=139 DBP=106 Temp=38.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,239 [WARNING] ICU-Monitor — [SIM][Step 21] PT-1005 | WARNING | Vitals: HR=105 SpO2=94 SBP=158 DBP=104 Temp=37.8 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,255 [WARNING] ICU-Monitor — [SIM][Step 22] PT-1001 | CRITICAL | Vitals: HR=158 SpO2=82 SBP=60 DBP=64 Temp=39.0 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,262 [WARNING] ICU-Monitor — [SIM][Step 22] PT-1002 | CRITICAL | Vitals: HR=87 SpO2=92 SBP=62 DBP=57 Temp=36.8 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,272 [WARNING] ICU-Monitor — [SIM][Step 22] PT-1003 | CRITICAL | Vitals: HR=105 SpO2=84 SBP=75 DBP=59 Temp=38.1 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,281 [WARNING] ICU-Monitor — [SIM][Step 22] PT-1004 | WARNING | Vitals: HR=106 SpO2=87 SBP=137 DBP=104 Temp=38.2 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,289 [WARNING] ICU-Monitor — [SIM][Step 22] PT-1005 | WARNING | Vitals: HR=107 SpO2=92 SBP=154 DBP=101 Temp=37.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,311 [WARNING] ICU-Monitor — [SIM][Step 23] PT-1001 | CRITICAL | Vitals: HR=157 SpO2=82 SBP=60 DBP=64 Temp=38.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,319 [WARNING] ICU-Monitor — [SIM][Step 23] PT-1002 | CRITICAL | Vitals: HR=85 SpO2=92 SBP=60 DBP=58 Temp=36.7 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,329 [WARNING] ICU-Monitor — [SIM][Step 23] PT-1003 | CRITICAL | Vitals: HR=113 SpO2=82 SBP=69 DBP=56 Temp=38.2 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,340 [WARNING] ICU-Monitor — [SIM][Step 23] PT-1004 | WARNING | Vitals: HR=114 SpO2=86 SBP=127 DBP=100 Temp=38.4 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,347 [WARNING] ICU-Monitor — [SIM][Step 23] PT-1005 | WARNING | Vitals: HR=115 SpO2=91 SBP=151 DBP=100 Temp=38.1 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,364 [WARNING] ICU-Monitor — [SIM][Step 24] PT-1001 | CRITICAL | Vitals: HR=156 SpO2=81 SBP=60 DBP=65 Temp=38.9 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,374 [WARNING] ICU-Monitor — [SIM][Step 24] PT-1002 | CRITICAL | Vitals: HR=85 SpO2=92 SBP=60 DBP=54 Temp=36.6 | Alarms: ['SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)']
+2026-04-06 21:11:36,383 [WARNING] ICU-Monitor — [SIM][Step 24] PT-1003 | CRITICAL | Vitals: HR=116 SpO2=82 SBP=60 DBP=54 Temp=38.5 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,390 [WARNING] ICU-Monitor — [SIM][Step 24] PT-1004 | CRITICAL | Vitals: HR=117 SpO2=84 SBP=121 DBP=98 Temp=38.7 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,398 [WARNING] ICU-Monitor — [SIM][Step 24] PT-1005 | WARNING | Vitals: HR=115 SpO2=89 SBP=144 DBP=99 Temp=38.4 | Alarms: ['Heart Rate (bpm)', 'SpO2 Level (%)', 'Systolic Blood Pressure (mmHg)', 'Diastolic Blood Pressure (mmHg)', 'Body Temperature (°C)']
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — [SIM] Simulation complete. Log saved → /Users/bsoft/Desktop/hanane_project/simulation_log.csv
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — ======================================================================
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — [PIPELINE] Full pipeline completed in 279.16 seconds.
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — [PIPELINE] Saved models  → /Users/bsoft/Desktop/hanane_project/
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — [PIPELINE] Reports       → /Users/bsoft/Desktop/hanane_project/
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — [PIPELINE] Figures       → /Users/bsoft/Desktop/hanane_project/
+2026-04-06 21:11:36,405 [INFO] ICU-Monitor — ======================================================================

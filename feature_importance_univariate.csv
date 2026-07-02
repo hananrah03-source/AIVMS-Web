@@ -1,0 +1,21 @@
+Target,Feature,F_Statistic,P_Value,Significant
+Heart Rate Alert,Heart Rate (bpm),70851.4286,0.0,True
+Heart Rate Alert,SpO2 Level (%),1120.0447,0.0,True
+Heart Rate Alert,Systolic Blood Pressure (mmHg),3411.4462,0.0,True
+Heart Rate Alert,Diastolic Blood Pressure (mmHg),1804.9528,0.0,True
+Heart Rate Alert,Body Temperature (°C),9.7092,0.001834,True
+SpO2 Level Alert,Heart Rate (bpm),3531.4661,0.0,True
+SpO2 Level Alert,SpO2 Level (%),136629.6775,0.0,True
+SpO2 Level Alert,Systolic Blood Pressure (mmHg),1.4782,0.224064,False
+SpO2 Level Alert,Diastolic Blood Pressure (mmHg),4.8368,0.027863,True
+SpO2 Level Alert,Body Temperature (°C),64.6637,0.0,True
+Blood Pressure Alert,Heart Rate (bpm),9799.2515,0.0,True
+Blood Pressure Alert,SpO2 Level (%),6.993,0.008185,True
+Blood Pressure Alert,Systolic Blood Pressure (mmHg),79524.871,0.0,True
+Blood Pressure Alert,Diastolic Blood Pressure (mmHg),73971.2061,0.0,True
+Blood Pressure Alert,Body Temperature (°C),0.0058,0.939157,False
+Temperature Alert,Heart Rate (bpm),465.7993,0.0,True
+Temperature Alert,SpO2 Level (%),0.3504,0.553917,False
+Temperature Alert,Systolic Blood Pressure (mmHg),205.8903,0.0,True
+Temperature Alert,Diastolic Blood Pressure (mmHg),285.0924,0.0,True
+Temperature Alert,Body Temperature (°C),97480.1367,0.0,True
